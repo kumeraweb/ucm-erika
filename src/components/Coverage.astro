@@ -1,0 +1,81 @@
+---
+
+---
+
+<section id="cobertura" class="relative overflow-hidden bg-slate-50 py-20">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+    <!-- Texto -->
+    <div class="fade-in-left text-center md:text-left">
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-[#204D8D] mb-4">
+        COBERTURA UCM
+      </h2>
+      <p class="text-xl text-slate-700 leading-relaxed">
+        Contamos con cobertura en todo el territorio chileno y en más de
+        <strong> 15 países </strong> de Latinoamérica mediante nuestra red asociada.
+      </p>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-semibold text-[#204D8D] mb-1">Nacional</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Presencia en todas las regiones de Chile, con unidades activas y atención 24/7.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-[#204D8D] mb-1">Internacional</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Red SIEM presente en más de 15 países de Latinoamérica.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen -->
+    <div class="fade-in-right flex justify-center md:justify-end">
+      <img
+        src="/servicios/cobertura-UCM.png"
+        alt="Cobertura UCM en Chile y Latinoamérica"
+        class="w-full h-auto max-w-[680px] md:max-w-[700px]
+      object-contain select-none"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- Franja decorativa inferior -->
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-[#204D8D] via-rose-500/60 to-[#204D8D]/70"
+  >
+  </div>
+</section>
+
+<style is:global>
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in-left {
+      animation: cov-fade-in-left 0.7s ease-out 0.1s both;
+    }
+    .fade-in-right {
+      animation: cov-fade-in-right 0.7s ease-out 0.25s both;
+    }
+  }
+  @keyframes cov-fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes cov-fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>

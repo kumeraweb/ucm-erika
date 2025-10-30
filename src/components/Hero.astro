@@ -1,0 +1,152 @@
+---
+import { SITE } from "../data/site";
+import Check from "./icons/Check.astro";
+
+interface Props {
+  bgImage?: string;
+  preloadBg?: boolean;
+  showVideo?: boolean;
+  videoSrc?: string;
+  videoSrcWebm?: string;
+  poster?: string;
+}
+const {
+  bgImage = "/media/ambulancias.jpg",
+  preloadBg = false,
+  showVideo = true,
+  videoSrc = "/media/ucm.mp4",
+  videoSrcWebm = "",
+  poster = "/media/ucm-poster.jpg",
+} = Astro.props;
+
+const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`;
+const call = `tel:+569${SITE.phone}`;
+---
+
+{preloadBg && (
+  <Fragment slot="head">
+    <link rel="preload" as="image" href={bgImage} imagesrcset={bgImage} />
+  </Fragment>
+)}
+
+<section class="relative overflow-hidden">
+  <!-- Fondo -->
+  <div class="absolute inset-0 -z-10">
+    <img
+      src={bgImage}
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="h-full w-full object-cover"
+      aria-hidden="true"
+    />
+    <div class="absolute inset-0 bg-black/45 md:bg-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/35 via-black/25 to-transparent"></div>
+  </div>
+
+  <div class="relative">
+    <div class="max-w-6xl mx-auto px-4 py-20 md:py-32 grid md:grid-cols-2 items-center gap-10">
+      <!-- Columna izquierda: texto -->
+      <div class="max-w-2xl">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white drop-shadow-lg">
+          Contrate Unidad Coronaria Móvil
+          <span class="text-[#204D8D]"> sin salir de casa</span>
+        </h1>
+
+        <p class="mt-6 text-xl text-slate-100/95 leading-relaxed">
+          Emergencias y urgencias <strong>24/7</strong>, <strong>telemedicina</strong> y
+          <strong>orientación médica</strong>. Te asesoro y gestiono tu plan sin trámites ni esperas.
+        </p>
+
+       <ul class="mt-8 space-y-3 text-slate-100 text-lg">
+        <li class="flex items-start gap-3">
+          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
+          <span>Atención de emergencias médicas de todo tipo</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
+          <span>Visita domiciliaria con telemedicina</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
+          <span>Telemedicina 100% online</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
+          <span>Orientación médica telefónica ilimitada</span>
+        </li>
+      </ul>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href={wa} data-cta="whatsapp_hero" class="rounded-xl px-7 py-4 text-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow-lg">
+            Cotizar por WhatsApp
+          </a>
+          <a href="#planes" data-cta="see_plans_hero" class="rounded-xl px-7 py-4 text-lg bg-white/95 text-slate-900 border border-white/40 hover:bg-white font-semibold shadow-lg">
+            Ver planes
+          </a>
+          <a href={call} data-cta="call_hero" class="rounded-xl px-7 py-4 text-lg bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow-lg">
+            Llamar ahora
+          </a>
+        </div>
+
+        <p class="mt-4 text-sm text-slate-200/80">Tiempo de respuesta habitual: &lt; 5 minutos.</p>
+      </div>
+
+      <!-- Columna derecha: video sobre el background -->
+      {showVideo && (
+        <figure class="relative md:justify-self-end">
+          <!-- Tarjeta del video -->
+          <div class="rounded-2xl backdrop-blur border border-white/60 shadow-xl p-3 md:p-28">
+            <!-- Mantén la relación; si tu clip es vertical usa 9:16, si es horizontal cambia a aspect-video -->
+            <div class="relative w-full max-w-[380px] md:max-w-[420px]">
+              <div class="aspect-[9/16] overflow-hidden rounded-xl">
+                <video
+                  id="heroVideo"
+                  class="h-full w-full object-cover"
+                  poster={poster}
+                  preload="metadata"
+                  muted
+                  playsinline
+                  autoplay
+                  loop
+                >
+                  {videoSrcWebm && <source src={videoSrcWebm} type="video/webm" />}
+                  {videoSrc && <source src={videoSrc} type="video/mp4" />}
+                  Tu navegador no puede reproducir el video.
+                </video>
+              </div>
+              <!-- Botón activar sonido -->
+              <button
+                type="button"
+                id="unmuteBtn"
+                class="absolute bottom-3 right-3 rounded-full bg-slate-900/80 text-white text-xs px-3 py-2 hover:bg-black"
+                aria-label="Activar sonido del video"
+              >
+                🔊 Activar sonido
+              </button>
+            </div>
+          </div>
+          <figcaption class="sr-only">Spot UCM: atención 24/7 y telemedicina</figcaption>
+        </figure>
+      )}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Activar audio con interacción
+  const v = document.getElementById('heroVideo');
+  const b = document.getElementById('unmuteBtn');
+  if (v && b) {
+    b.addEventListener('click', () => {
+      try {
+        v.muted = false;
+        v.volume = 0.2;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+        b.style.display = 'none';
+      } catch (_) {}
+    });
+  }
+</script>

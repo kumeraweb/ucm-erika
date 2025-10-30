@@ -1,0 +1,83 @@
+---
+interface Service {
+  title: string
+  text: string
+  image: string
+}
+
+const services: Service[] = [
+  {
+    title: 'ATENCIÓN DE EMERGENCIAS',
+    text: 'Emergencia Médica es toda condición de salud o cuadro clínico que implique riesgo vital y/o secuela funcional grave para una persona de no mediar la atención médica inmediata e impostergable.',
+    image: '/servicios/atencion_emergencia.jpg'
+  },
+  {
+    title: 'ATENCIÓN DE URGENCIAS',
+    text: 'Urgencia Médica es toda situación de salud que no presenta riesgo vital inminente pero que requiere, en consideración a los síntomas existentes, de una evaluación médica pudiendo ser ésta no inmediata.',
+    image: '/servicios/atencion_urgencia.jpg'
+  },
+  {
+    title: 'ORIENTACIÓN MÉDICA TELEFÓNICA',
+    text: 'Evaluación del cuadro y recomendaciones hechas por profesionales altamente capacitados para ayudar a solucionar y orientar tus dudas sobre situaciones de salud.',
+    image: '/servicios/orientacion_medica.jpg'
+  },
+  {
+    title: 'TELEMEDICINA',
+    text: 'Con Telemedicina, nuestros beneficiarios podrán disfrutar de una atención más rápida, tecnológica y resolutiva, comparable a una atención presencial.',
+    image: '/servicios/telemedicina.jpg'
+  },
+  {
+    title: '24 HORAS, TODOS LOS DÍAS',
+    text: 'Queremos tu tranquilidad y la de tu familia. En UCM estamos a tu disposición las 24 horas del día, todos los días de la semana.',
+    image: '/servicios/horas.jpg'
+  }
+]
+---
+
+<section id="servicios" class="py-20 bg-white relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-center text-[#204D8D] mb-4 tracking-tight">
+      SERVICIOS UNIDAD CORONARIA MÓVIL
+    </h2>
+    <p class="text-center text-slate-600 max-w-2xl mx-auto mb-14">
+      Atención médica integral las 24 horas del día, en la comodidad de tu hogar.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      {
+        services.map((s, i) => (
+          <div
+            class="group bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-100 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl opacity-0 translate-y-8"
+            style={`animation: fadeInUp 0.7s ease forwards ${i * 0.15}s`}
+          >
+            <div class="aspect-video overflow-hidden">
+              <img
+                src={s.image}
+                alt={s.title}
+                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-[#204D8D] mb-2">{s.title}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">{s.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

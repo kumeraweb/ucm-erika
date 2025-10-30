@@ -1,0 +1,11 @@
+---
+import { SITE } from '../data/site'
+const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(
+  SITE.name
+)}%2C%20quiero%20conocer%20los%20planes%20en%20promoción`
+---
+
+<div class="bg-rose-500 text-white text-center text-sm md:text-base py-2">
+  Consulte por planes en promoción Unidad Coronaria Móvil&nbsp;
+  <a href={wa} data-cta="promo_banner" class="font-semibold underline hover:text-rose-100"> acá </a>
+</div>

@@ -1,0 +1,76 @@
+---
+import { SITE } from "../data/site";
+const title = `Contrata UCM en ${SITE.city} con ${SITE.name}`;
+const description =
+  "Emergencias y urgencias 24/7, telemedicina y orientación médica. Asesoría directa por WhatsApp y llamada.";
+const url = `${SITE.domain}/${SITE.slug}`;
+import '../styles/global.css'
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content="/og-ucm.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        name: `Unidad Coronaria Móvil – ${SITE.name}`,
+        areaServed: SITE.city,
+        image: `${SITE.domain}/og-ucm.jpg`,
+        telephone: `+56 ${SITE.phone}`,
+        url,
+        sameAs: ["https://www.ucmchile.cl"],
+        openingHours: "Mo-Su 00:00-23:59",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: SITE.city,
+          addressRegion: SITE.region,
+          addressCountry: "CL",
+        },
+      })}
+    </script>
+
+    <!-- GA4 (reemplaza G-XXXXXXX o bórralo si no usarás) -->
+    {false && (
+      <>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+        <script>
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); gtag('config', 'G-XXXXXXX');`}
+        </script>
+      </>
+    )}
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased">
+    <!-- Header stickier vendrá como componente luego -->
+    <slot />
+
+    <!-- Eventos simples para Ads / Analytics -->
+    <script>
+      const send = (name:any, params = {}) => {
+        console.log('event', name, params);
+        // gtag('event', name, params) // activa si usas GA4
+      };
+      document.querySelectorAll('[data-cta]')
+        ?.forEach(el => el.addEventListener('click', () =>
+          send('cta_click', { id: el.getAttribute('data-cta') })));
+    </script>
+  </body>
+</html>
