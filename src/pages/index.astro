@@ -7,7 +7,7 @@ import Hero from '../components/Hero.astro'
 import Services from '../components/Services.astro'
 import Coverage from '../components/Coverage.astro'
 import Contact from '../components/Contact.astro'
-import PromoModal from '../components/PromoModal.astro'
+import MonthlyPromo from '../components/MonthlyPromo.astro'
 
 import { SITE } from '../data/site'
 const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
@@ -19,16 +19,10 @@ const call = `tel:+569${SITE.phone}`
   <PromoBanner />
   <main>
     <Hero bgImage="/ambulancias.jpg" preloadBg={true} />
-
-    <!-- Placeholder para secciones futuras -->
-    <section id="servicios" class="py-16 bg-white">
-      <Services />
-    </section>
+    <MonthlyPromo image="/promos/prom.jpg" alt="Promoción planes UCM Octubre" />
+    <Services />
     <PromoBanner />
-
     <Coverage />
-
     <Contact formspree="https://formspree.io/f/XXXXXXXX" />
   </main>
-  <PromoModal image="/promos/prom.jpg" delay={10} oncePerSession={true} />
 </BaseLayout>

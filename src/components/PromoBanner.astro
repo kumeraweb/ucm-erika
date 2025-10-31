@@ -2,10 +2,36 @@
 import { SITE } from '../data/site'
 const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(
   SITE.name
-)}%2C%20quiero%20conocer%20los%20planes%20en%20promoción`
+)}%2C%20quisiera%20hablar%20con%20usted%20sobre%20UCM`
+const mensajes = [
+  'Atención médica 24/7 en todo Chile 🇨🇱',
+  'Asesoría personalizada sin costo 💬',
+  'Ejecutivas disponibles todos los días 🕐'
+]
 ---
 
-<div class="bg-rose-500 text-white text-center text-sm md:text-base py-2">
-  Consulte por planes en promoción Unidad Coronaria Móvil&nbsp;
-  <a href={wa} data-cta="promo_banner" class="font-semibold underline hover:text-rose-100"> acá </a>
+<div class="bg-[#204D8D] text-white text-center py-2 overflow-hidden">
+  <div class="animate-slide flex gap-10 text-sm md:text-base whitespace-nowrap">
+    {
+      mensajes.map((msg) => (
+        <a href={wa} data-cta="banner_rotativo" class="hover:text-rose-200 transition">
+          {msg}
+        </a>
+      ))
+    }
+  </div>
 </div>
+
+<style is:global>
+  @keyframes slide {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .animate-slide {
+    animation: slide 25s linear infinite;
+  }
+</style>
