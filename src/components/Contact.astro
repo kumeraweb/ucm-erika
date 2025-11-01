@@ -1,198 +1,68 @@
 ---
 import { SITE } from '../data/site'
 
-/**
- * Pasa tu endpoint de Formspree:
- *  - Crea un form en https://formspree.io
- *  - Copia tu endpoint (ej: "https://formspree.io/f/abcdwxyz")
- *  - Úsalo como prop formspree
- */
-interface Props {
-  formspree: string // requerido
-}
-const { formspree } = Astro.props
-
-const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
-const call = `tel:+569${SITE.phone}`
-const mailto = `mailto:${SITE.email}`
+const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(
+  SITE.name
+)}%2C%20quiero%20cotizar%20UCM`
+const call = `tel:${SITE.cleanPhone}`
 ---
 
 <section id="contacto" class="py-20 bg-white">
-  <div class="max-w-6xl mx-auto px-4">
+  <div class="max-w-4xl mx-auto px-4">
     <!-- Encabezado -->
     <div class="text-center mb-10">
       <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-[#204D8D]">
         ¿Listo para contratar?
       </h2>
       <p class="mt-3 text-lg text-slate-600">
-        Habla directo con <span class="font-semibold text-slate-800">{SITE.name}</span> — UCM {
+        Habla directo con <span class="font-semibold text-slate-800">tu ejecutiva</span> — UCM {
           SITE.city
         }, {SITE.region}
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-10 items-start">
-      <!-- Columna izquierda: tarjeta ejecutiva + botones -->
-      <aside class="rounded-2xl border border-slate-200 p-6 shadow-sm bg-slate-50/60">
-        <div class="flex items-center gap-4">
-          <img src="/logos/logo-ucm.png" alt="UCM" class="h-10 w-auto" loading="lazy" />
-          <div>
-            <p class="text-sm uppercase tracking-wide text-slate-500">Tu ejecutiva</p>
-            <h3 class="text-2xl font-extrabold text-slate-900">{SITE.name}</h3>
-          </div>
+    <!-- Tarjeta ejecutiva -->
+    <aside
+      class="max-w-xl mx-auto rounded-2xl border border-slate-200 p-6 shadow-sm bg-slate-50/60"
+    >
+      <div class="flex items-center gap-4">
+        <img src="/logos/logo-ucm.png" alt="UCM" class="h-10 w-auto" loading="lazy" />
+        <div>
+          <p class="text-sm uppercase tracking-wide text-slate-500">Contacta a tu ejecutiva</p>
+          <!-- <h3 class="text-2xl font-extrabold text-slate-900">{SITE.name}</h3> -->
         </div>
+      </div>
 
-        <dl class="mt-6 space-y-2 text-slate-700">
-          <div class="flex items-center gap-2">
-            <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
-            <dt class="font-semibold">Ciudad/Región:</dt>
-            <dd class="ml-1">UCM {SITE.city}, {SITE.region}</dd>
-          </div>
-          <div>
-            <dt class="font-semibold inline">Teléfono:</dt>
-            <dd class="inline">{SITE.phone}</dd>
-          </div>
-          <div>
-            <dt class="font-semibold inline">Correo:</dt>
-            <dd class="inline">{SITE.email}</dd>
-          </div>
-        </dl>
-
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a
-            href={wa}
-            data-cta="whatsapp_contact"
-            class="rounded-xl px-5 py-3 bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow"
-            >Escribir por WhatsApp</a
-          >
-          <a
-            href={call}
-            data-cta="call_contact"
-            class="rounded-xl px-5 py-3 bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow"
-            >Llamar ahora</a
-          >
-          <a
-            href={mailto}
-            class="rounded-xl px-5 py-3 bg-white border border-slate-200 font-semibold hover:bg-slate-100 shadow"
-            >Enviar correo</a
-          >
+      <dl class="mt-6 space-y-2 text-slate-700">
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+          <dt class="font-semibold">Ciudad/Región:</dt>
+          <dd class="ml-1">UCM {SITE.city}, {SITE.region}</dd>
         </div>
-      </aside>
-
-      <!-- Columna derecha: formulario rápido -->
-      <form id="quickForm" class="rounded-2xl border border-slate-200 p-6 shadow-sm bg-white">
-        <h3 class="text-xl font-bold text-slate-900">Déjame tus datos y te contacto</h3>
-        <p class="text-sm text-slate-600 mt-1">
-          Nombre y correo bastan. También puedes agregar un comentario.
-        </p>
-
-        <!-- honeypot contra spam -->
-        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
-
-        <!-- subject para tu bandeja -->
-        <input type="hidden" name="_subject" value="Nueva consulta UCM desde landing" />
-        <!-- opcional: redirigir tras enviar (si usas submit normal) -->
-        <!-- <input type="hidden" name="_next" value={`${SITE.domain}/${SITE.slug}#contacto`} /> -->
-
-        <div class="mt-5 grid gap-4">
-          <label class="block">
-            <span class="text-sm font-medium text-slate-700">Nombre</span>
-            <input
-              type="text"
-              name="name"
-              required
-              class="p-2 mt-1 w-full rounded-lg border-slate-300 focus:border-[#204D8D] focus:ring-[#204D8D]"
-              placeholder="Tu nombre"
-            />
-          </label>
-
-          <label class="block">
-            <span class="text-sm font-medium text-slate-700">Correo</span>
-            <input
-              type="email"
-              name="email"
-              required
-              class="p-2 mt-1 w-full rounded-lg border-slate-300 focus:border-[#204D8D] focus:ring-[#204D8D]"
-              placeholder="tu@correo.cl"
-            />
-          </label>
-
-          <label class="block">
-            <span class="text-sm font-medium text-slate-700">Mensaje (opcional)</span>
-            <textarea
-              name="message"
-              rows="4"
-              class="p-2 mt-1 w-full rounded-lg border-slate-300 focus:border-[#204D8D] focus:ring-[#204D8D]"
-              placeholder="Cuéntame brevemente qué necesitas"></textarea>
-          </label>
-
-          <!-- info útil para ti -->
-          <input type="hidden" name="executive" value={SITE.name} />
-          <input type="hidden" name="city" value={SITE.city} />
-          <input type="hidden" name="landing" value={`${SITE.domain}/${SITE.slug}`} />
+        <div>
+          <dt class="font-semibold inline">Teléfono:</dt>
+          <dd class="inline">{SITE.phone}</dd>
         </div>
-
-        <div class="mt-6 flex items-center gap-3">
-          <button
-            id="sendBtn"
-            type="submit"
-            data-cta="form_send"
-            class="rounded-xl px-6 py-3 bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow"
-          >
-            Enviar solicitud
-          </button>
-          <p id="formMsg" class="text-sm text-slate-600"></p>
+        <div>
+          <dt class="font-semibold inline">Correo:</dt>
+          <dd class="inline">{SITE.email}</dd>
         </div>
+      </dl>
 
-        <p class="mt-3 text-xs text-slate-500">
-          Al enviar, autorizas a {SITE.name} a contactarte por correo o teléfono. No compartimos tus
-          datos.
-        </p>
-      </form>
-    </div>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          href={wa}
+          data-cta="whatsapp_contact"
+          class="rounded-xl px-5 py-3 bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow"
+          aria-label="Escribir a la ejecutiva por WhatsApp">Escribir por WhatsApp</a
+        >
+        <a
+          href={call}
+          data-cta="call_contact"
+          class="rounded-xl px-5 py-3 bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow"
+          aria-label="Llamar ahora a la ejecutiva">Llamar ahora</a
+        >
+      </div>
+    </aside>
   </div>
 </section>
-
-<script is:inline>
-  // Envío con fetch para no salir de la página
-  ;(function () {
-    const form = document.getElementById('quickForm')
-    const btn = document.getElementById('sendBtn')
-    const msg = document.getElementById('formMsg')
-    if (!form || !btn || !msg) return
-
-    const endpoint = { formspree } // pasado por props
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault()
-      msg.textContent = ''
-      btn.disabled = true
-      btn.textContent = 'Enviando...'
-
-      const data = new FormData(form)
-
-      try {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: data
-        })
-
-        if (res.ok) {
-          msg.textContent = '¡Gracias! Te contactaremos muy pronto.'
-          msg.className = 'text-sm text-emerald-600'
-          form.reset()
-        } else {
-          msg.textContent = 'Hubo un problema al enviar. Inténtalo nuevamente.'
-          msg.className = 'text-sm text-rose-600'
-        }
-      } catch {
-        msg.textContent = 'Sin conexión. Revisa tu internet e inténtalo otra vez.'
-        msg.className = 'text-sm text-rose-600'
-      } finally {
-        btn.disabled = false
-        btn.textContent = 'Enviar solicitud'
-      }
-    })
-  })()
-</script>

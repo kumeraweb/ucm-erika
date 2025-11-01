@@ -19,8 +19,10 @@ const {
   poster = "/media/ucm-poster.jpg",
 } = Astro.props;
 
-const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`;
-const call = `tel:+569${SITE.phone}`;
+const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
+
+const call = `tel:${SITE.cleanPhone}`;
+
 ---
 
 {preloadBg && (

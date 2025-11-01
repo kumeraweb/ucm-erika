@@ -8,6 +8,7 @@ import Services from '../components/Services.astro'
 import Coverage from '../components/Coverage.astro'
 import Contact from '../components/Contact.astro'
 import MonthlyPromo from '../components/MonthlyPromo.astro'
+import Footer from '../components/Footer.astro'
 
 import { SITE } from '../data/site'
 const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
@@ -23,6 +24,7 @@ const call = `tel:+569${SITE.phone}`
     <Services />
     <PromoBanner />
     <Coverage />
-    <Contact formspree="https://formspree.io/f/XXXXXXXX" />
+    <Contact />
   </main>
+  <Footer />
 </BaseLayout>

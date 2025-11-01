@@ -8,9 +8,7 @@ interface Props {
 
 const { image, alt = 'Promoción del mes UCM' } = Astro.props
 
-const wa = `https://wa.me/56${SITE.phone}?text=Hola%20${encodeURIComponent(
-  SITE.name
-)}%2C%20quiero%20saber%20más%20sobre%20la%20promoción%20UCM`
+const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
 ---
 
 <section id="promocion-mensual" class="relative w-full overflow-hidden bg-white">
