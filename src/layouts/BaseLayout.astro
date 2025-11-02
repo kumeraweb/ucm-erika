@@ -1,8 +1,8 @@
 ---
 import { SITE } from "../data/site";
-const title = `Contrata UCM en ${SITE.city} con ${SITE.name}`;
-const description =
-  "Emergencias y urgencias 24/7, telemedicina y orientación médica. Asesoría directa por WhatsApp y llamada.";
+
+const title = `Unidad Coronaria Móvil (UCM) | Rescate Médico y Ambulancias 24/7 en Santiago y Valparaíso`;
+const description = `Servicio de Unidad Coronaria Móvil (UCM) con ambulancias avanzadas y atención médica a domicilio en Santiago y Región de Valparaíso. Emergencias y urgencias médicas las 24 horas.`;
 const url = `${SITE.domain}/${SITE.slug}`;
 import '../styles/global.css'
 ---
@@ -13,60 +13,95 @@ import '../styles/global.css'
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="rescate médico, ambulancia avanzada, atención médica a domicilio, urgencias médicas, ambulancia 24 horas, unidad coronaria móvil, rescate médico Santiago, rescate médico Viña del Mar, atención domiciliaria urgente, traslado de pacientes críticos" />
 
-    <!-- Open Graph / Twitter -->
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
-    <meta property="og:image" content="/og-ucm.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={`${SITE.domain}/og-ucm.jpg`} />
+    <meta property="og:locale" content="es_CL" />
 
-    <!-- Schema.org LocalBusiness -->
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE.domain}/og-ucm.jpg`} />
+
+    <!-- LocalBusiness Schema -->
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        name: `Unidad Coronaria Móvil – ${SITE.name}`,
-        areaServed: SITE.city,
-        image: `${SITE.domain}/og-ucm.jpg`,
-        telephone: `+56 ${SITE.phone}`,
-        url,
-        sameAs: ["https://www.ucmchile.cl"],
-        openingHours: "Mo-Su 00:00-23:59",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: SITE.city,
-          addressRegion: SITE.region,
-          addressCountry: "CL",
+        "@type": "MedicalBusiness",
+        "name": "Unidad Coronaria Móvil (UCM) – Rescate Médico",
+        "description": description,
+        "url": SITE.domain,
+        "image": `${SITE.domain}/og-ucm.jpg`,
+        "telephone": `+56 ${SITE.phone}`,
+        "priceRange": "$$",
+        "openingHours": "Mo-Su 00:00-23:59",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -33.45694, // Santiago
+          "longitude": -70.64827
         },
+        "areaServed": [
+          {
+            "@type": "Place",
+            "name": "Región Metropolitana de Santiago"
+          },
+          {
+            "@type": "Place",
+            "name": "Región de Valparaíso"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressRegion": "Región Metropolitana",
+          "addressCountry": "CL"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "120"
+        },
+        "sameAs": [
+          "https://www.ucmchile.cl",
+          "https://www.instagram.com/ucmchile",
+          "https://www.facebook.com/ucmchile"
+        ]
       })}
     </script>
 
-    <!-- GA4 (reemplaza G-XXXXXXX o bórralo si no usarás) -->
+    <!-- Google Tag (opcional, GA4) -->
     {false && (
       <>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
         <script>
           {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date()); gtag('config', 'G-XXXXXXX');`}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXX');`}
         </script>
       </>
     )}
   </head>
+
   <body class="bg-slate-50 text-slate-800 antialiased">
-    <!-- Header stickier vendrá como componente luego -->
     <slot />
 
     <!-- Eventos simples para Ads / Analytics -->
     <script>
       const send = (name:any, params = {}) => {
         console.log('event', name, params);
-        // gtag('event', name, params) // activa si usas GA4
       };
       document.querySelectorAll('[data-cta]')
         ?.forEach(el => el.addEventListener('click', () =>

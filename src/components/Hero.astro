@@ -19,10 +19,8 @@ const {
   poster = "/media/ucm-poster.jpg",
 } = Astro.props;
 
-const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
-
-const call = `tel:${SITE.cleanPhone}`;
-
+const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM&utm_source=site&utm_medium=hero&utm_campaign=cta_whatsapp`;
+const call = `tel:+56${SITE.cleanPhone}`;
 ---
 
 {preloadBg && (
@@ -31,7 +29,24 @@ const call = `tel:${SITE.cleanPhone}`;
   </Fragment>
 )}
 
-<section class="relative overflow-hidden">
+{showVideo && (
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Unidad Coronaria Móvil (UCM) – Rescate Médico 24/7",
+        "description": "Ambulancias avanzadas y atención médica a domicilio en Santiago y Región de Valparaíso. Telemedicina y orientación médica 24/7.",
+        "thumbnailUrl": [`${SITE.domain}${poster}`],
+        "uploadDate": new Date().toISOString(),
+        "contentUrl": `${SITE.domain}${videoSrc}`,
+        "embedUrl": `${SITE.domain}${videoSrc}`,
+      })}
+    </script>
+  </Fragment>
+)}
+
+<section id="hero" class="relative overflow-hidden" aria-labelledby="hero-title">
   <!-- Fondo -->
   <div class="absolute inset-0 -z-10">
     <img
@@ -51,56 +66,70 @@ const call = `tel:${SITE.cleanPhone}`;
     <div class="max-w-6xl mx-auto px-4 py-20 md:py-32 grid md:grid-cols-2 items-center gap-10">
       <!-- Columna izquierda: texto -->
       <div class="max-w-2xl">
-        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white drop-shadow-lg">
-          Contrate Unidad Coronaria Móvil
-          <span class="text-[#204D8D]"> sin salir de casa</span>
+        <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold leading-tight text-white drop-shadow-lg">
+          Unidad Coronaria Móvil (UCM):
+          <span class="block">Rescate Médico y Ambulancias 24/7</span>
+          <span class="block text-rose-400">en Santiago y Región de Valparaíso</span>
         </h1>
 
         <p class="mt-6 text-xl text-slate-100/95 leading-relaxed">
-          Emergencias y urgencias <strong>24/7</strong>, <strong>telemedicina</strong> y
-          <strong>orientación médica</strong>. Te asesoro y gestiono tu plan sin trámites ni esperas.
+          <strong>Ambulancia avanzada</strong> y <strong>atención médica a domicilio</strong> con
+          <strong>telemedicina</strong> y <strong>orientación 24/7</strong>. Te ayudo a elegir y contratar tu plan sin trámites ni esperas.
         </p>
 
-       <ul class="mt-8 space-y-3 text-slate-100 text-lg">
-        <li class="flex items-start gap-3">
-          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
-          <span>Atencion de Emergencias y Urgencias médicas</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
-          <span>Visita domiciliaria con telemedicina</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
-          <span>Telemedicina 100% online</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <Check class="mt-1 text-rose-500 shrink-0" size={22} />
-          <span>Orientación médica telefónica ilimitada</span>
-        </li>
-      </ul>
+        <ul class="mt-8 space-y-3 text-slate-100 text-lg">
+          <li class="flex items-start gap-3">
+            <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
+            <span>Emergencias y <strong>urgencias médicas</strong> 24 horas</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
+            <span><strong>Ambulancia avanzada (ALS)</strong> y atención prehospitalaria</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
+            <span><strong>Atención a domicilio</strong> + <strong>telemedicina</strong> inmediata</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
+            <span>Orientación médica telefónica <strong>ilimitada</strong></span>
+          </li>
+        </ul>
 
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href={wa} data-cta="whatsapp_hero" class="rounded-xl w-full text-center px-7 py-4 text-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow-lg">
+          <a
+            href={wa}
+            data-cta="whatsapp_hero"
+            class="rounded-xl w-full text-center px-7 py-4 text-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow-lg"
+          >
             Cotizar por WhatsApp
           </a>
-          <a href={call} data-cta="call_hero" class="rounded-xl w-full text-center px-7 py-4 text-lg bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow-lg">
+          <a
+            href={call}
+            data-cta="call_hero"
+            class="rounded-xl w-full text-center px-7 py-4 text-lg bg-[#204D8D] text-white font-semibold hover:bg-[#1b3f74] shadow-lg"
+          >
             Llamar ahora
           </a>
         </div>
+
+        <p class="mt-4 text-slate-200/90 text-sm">
+          Cobertura: <a href="#cobertura" class="underline hover:no-underline">Santiago (RM)</a> ·
+          <a href="#cobertura" class="underline hover:no-underline">Viña del Mar</a> ·
+          <a href="#cobertura" class="underline hover:no-underline">Valparaíso</a>
+        </p>
       </div>
 
-      <!-- Columna derecha: video sobre el background -->
+      <!-- Columna derecha: video -->
       {showVideo && (
         <figure class="relative md:justify-self-end">
-          <!-- Tarjeta del video -->
           <div class="rounded-2xl backdrop-blur border border-white/60 shadow-xl p-3 md:p-28">
-            <!-- Mantén la relación; si tu clip es vertical usa 9:16, si es horizontal cambia a aspect-video -->
             <div class="relative w-full max-w-[380px] md:max-w-[420px]">
               <div class="aspect-[9/16] overflow-hidden rounded-xl">
                 <video
                   id="heroVideo"
                   class="h-full w-full object-cover"
+                  title="Presentación Unidad Coronaria Móvil (UCM)"
                   poster={poster}
                   preload="metadata"
                   muted
@@ -113,18 +142,18 @@ const call = `tel:${SITE.cleanPhone}`;
                   Tu navegador no puede reproducir el video.
                 </video>
               </div>
-              <!-- Botón activar sonido -->
               <button
                 type="button"
                 id="unmuteBtn"
                 class="absolute bottom-3 right-3 rounded-full bg-slate-900/80 text-white text-xs px-3 py-2 hover:bg-black"
                 aria-label="Activar sonido del video"
+                aria-pressed="false"
               >
                 🔊 Activar sonido
               </button>
             </div>
           </div>
-          <figcaption class="sr-only">Spot UCM: atención 24/7 y telemedicina</figcaption>
+          <figcaption class="sr-only">Ambulancias y atención 24/7 de la Unidad Coronaria Móvil (UCM).</figcaption>
         </figure>
       )}
     </div>
@@ -142,6 +171,7 @@ const call = `tel:${SITE.cleanPhone}`;
         v.volume = 0.2;
         const p = v.play();
         if (p && p.catch) p.catch(() => {});
+        b.setAttribute('aria-pressed', 'true');
         b.style.display = 'none';
       } catch (_) {}
     });
