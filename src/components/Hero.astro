@@ -21,7 +21,7 @@ const {
 } = Astro.props
 
 const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20un%20plan%20UCM&utm_source=site&utm_medium=hero&utm_campaign=cta_whatsapp`
-const call = `tel:+56${SITE.cleanPhone}`
+const call = `tel:+${SITE.cleanPhone}`
 ---
 
 <section id="hero" class="relative overflow-hidden" aria-labelledby="hero-title">
