@@ -1,9 +1,13 @@
 ---
 import { SITE } from "../data/site";
 
-const title = `Unidad Coronaria Móvil (UCM) | Rescate Médico y Ambulancias 24/7 en Santiago y Valparaíso`;
-const description = `Servicio de Unidad Coronaria Móvil (UCM) con ambulancias avanzadas y atención médica a domicilio en Santiago y Región de Valparaíso. Emergencias y urgencias médicas las 24 horas.`;
-const url = `${SITE.domain}/${SITE.slug}`;
+// Si este layout es SOLO para el home:
+const canonical = SITE.domain.replace(/\/+$/, ""); // https://www.rescatesmedicos.cl
+
+const title = `Planes Unidad Coronaria Móvil (UCM) | Asistencia Médica a Domicilio en Santiago y Valparaíso`;
+const description = `Contrata tu plan UCM y accede a asistencia médica a domicilio las 24 horas. Protección para ti, tu familia o tu empresa en Santiago y Valparaíso. Atención confiable y respaldo profesional.`;
+
+// Si usas este layout en páginas hijas, pasa canonical por props o usa Astro.url
 import '../styles/global.css'
 ---
 
@@ -13,54 +17,50 @@ import '../styles/global.css'
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="rescate médico, ambulancia avanzada, atención médica a domicilio, urgencias médicas, ambulancia 24 horas, unidad coronaria móvil, rescate médico Santiago, rescate médico Viña del Mar, atención domiciliaria urgente, traslado de pacientes críticos" />
+    <!-- meta keywords se puede omitir -->
 
-    <link rel="canonical" href={url} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/favicon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rescate Médico – Planes UCM" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={url} />
-    <meta property="og:image" content={`${SITE.domain}/og-ucm.jpg`} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${canonical}/og-ucm.jpg`} />
     <meta property="og:locale" content="es_CL" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${SITE.domain}/og-ucm.jpg`} />
+    <meta name="twitter:image" content={`${canonical}/og-ucm.jpg`} />
 
-    <!-- LocalBusiness Schema -->
+    <!-- LocalBusiness / MedicalBusiness Schema -->
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "MedicalBusiness",
-        "name": "Unidad Coronaria Móvil (UCM) – Rescate Médico",
+        "name": "Planes UCM – Rescate Médico",
         "description": description,
-        "url": SITE.domain,
-        "image": `${SITE.domain}/og-ucm.jpg`,
-        "telephone": `+56 ${SITE.phone}`,
+        "url": canonical,
+        "image": `${canonical}/og-ucm.jpg`,
+        "telephone": `+56${SITE.phone}`, // sin espacios
         "priceRange": "$$",
         "openingHours": "Mo-Su 00:00-23:59",
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": -33.45694, // Santiago
+          "latitude": -33.45694,
           "longitude": -70.64827
         },
         "areaServed": [
-          {
-            "@type": "Place",
-            "name": "Región Metropolitana de Santiago"
-          },
-          {
-            "@type": "Place",
-            "name": "Región de Valparaíso"
-          }
+          { "@type": "Place", "name": "Región Metropolitana de Santiago" },
+          { "@type": "Place", "name": "Región de Valparaíso" }
         ],
         "address": {
           "@type": "PostalAddress",
@@ -68,28 +68,29 @@ import '../styles/global.css'
           "addressRegion": "Región Metropolitana",
           "addressCountry": "CL"
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "120"
-        },
-        "sameAs": [
-          "https://www.ucmchile.cl",
-          "https://www.instagram.com/ucmchile",
-          "https://www.facebook.com/ucmchile"
-        ]
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Planes UCM",
+          "itemListElement": [
+            { "@type": "Offer", "name": "Plan Familiar", "category": "Familiar", "priceCurrency": "CLP" },
+            { "@type": "Offer", "name": "Plan Empresas", "category": "Empresas", "priceCurrency": "CLP" }
+          ]
+        }
+        // OJO: No incluir aggregateRating si no tienes reseñas verificables
+        // No incluir sameAs a perfiles que no pertenezcan a tu clienta
       })}
     </script>
 
     <!-- Google Tag (opcional, GA4) -->
     {false && (
       <>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
         <script>
           {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXX');`}
+            gtag('config', 'G-XXXXXXX', { send_page_view: true });`}
         </script>
       </>
     )}
@@ -98,14 +99,36 @@ import '../styles/global.css'
   <body class="bg-slate-50 text-slate-800 antialiased">
     <slot />
 
-    <!-- Eventos simples para Ads / Analytics -->
+    <!-- Tracking de CTAs: GA4 o GTM fallback -->
     <script>
-      const send = (name:any, params = {}) => {
-        console.log('event', name, params);
-      };
-      document.querySelectorAll('[data-cta]')
-        ?.forEach(el => el.addEventListener('click', () =>
-          send('cta_click', { id: el.getAttribute('data-cta') })));
+      (function(){
+        function track(eventName, params) {
+          if (window.gtag) {
+            window.gtag('event', eventName, params || {});
+          } else if (window.dataLayer) {
+            window.dataLayer.push({ event: eventName, ...(params||{}) });
+          } else {
+            console.log('event', eventName, params || {});
+          }
+        }
+
+        function onReady(cb) {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', cb);
+          } else { cb(); }
+        }
+
+        onReady(function () {
+          document.querySelectorAll('[data-cta]')?.forEach(function(el){
+            el.addEventListener('click', function(){
+              const id = el.getAttribute('data-cta') || 'cta';
+              track('cta_click', { id });
+              if (id.includes('whatsapp')) track('click_whatsapp', { id });
+              if (id.includes('llamar') || id.includes('call')) track('click_tel', { id });
+            });
+          });
+        });
+      })();
     </script>
   </body>
 </html>

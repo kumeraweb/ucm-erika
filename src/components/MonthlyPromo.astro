@@ -11,7 +11,7 @@ const { image, alt = 'Promoción del mes UCM' } = Astro.props
 const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20UCM`
 ---
 
-<section id="promocion-mensual" class="relative w-full overflow-hidden bg-white">
+<section id="planes" class="relative w-full overflow-hidden bg-white">
   <a href={wa} target="_blank" rel="noopener noreferrer" data-cta="whatsapp_promo">
     <img
       src={image}
