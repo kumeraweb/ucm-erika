@@ -1,15 +1,11 @@
 ---
 import { SITE } from "../data/site";
 
-// Si este layout es SOLO para el home:
-const canonical = SITE.domain.replace(/\/+$/, ""); // https://www.rescatesmedicos.cl
-
+const canonical = SITE.domain.replace(/\/+$/, "");
 const title = `Unidad Coronaria Móvil (UCM) 24/7 | Asistencia Médica y Rescate a Domicilio`;
 const description = `Contrata tu plan con la Unidad Coronaria Móvil (UCM). Asistencia médica 24/7, ambulancias equipadas y cobertura en Santiago y Valparaíso. Cotiza hoy.`;
 
-
-// Si usas este layout en páginas hijas, pasa canonical por props o usa Astro.url
-import '../styles/global.css'
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -19,10 +15,8 @@ import '../styles/global.css'
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
-
     <title>{title}</title>
     <meta name="description" content={description} />
-    <!-- meta keywords se puede omitir -->
 
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -42,7 +36,7 @@ import '../styles/global.css'
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${canonical}/og-ucm.jpg`} />
 
-    <!-- LocalBusiness / MedicalBusiness Schema -->
+    <!-- Schema -->
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
@@ -51,7 +45,7 @@ import '../styles/global.css'
         "description": description,
         "url": canonical,
         "image": `${canonical}/og-ucm.jpg`,
-        "telephone": `+56${SITE.phone}`, // sin espacios
+        "telephone": `+56${SITE.phone}`,
         "priceRange": "$$",
         "openingHours": "Mo-Su 00:00-23:59",
         "geo": {
@@ -77,68 +71,80 @@ import '../styles/global.css'
             { "@type": "Offer", "name": "Plan Empresas", "category": "Empresas", "priceCurrency": "CLP" }
           ]
         }
-        // OJO: No incluir aggregateRating si no tienes reseñas verificables
-        // No incluir sameAs a perfiles que no pertenezcan a tu clienta
       })}
     </script>
 
-    <!-- Google Tag (opcional, GA4) -->
-    {false && (
-      <>
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-        <script>
-          {`window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXX', { send_page_view: true });`}
-        </script>
-      </>
-    )}
-
-    <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17545387254');
+   <!-- Google Tag global (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
+<script>
+  // @ts-ignore
+  window.dataLayer = window.dataLayer || [];
+  // @ts-ignore
+  function gtag(){dataLayer.push(arguments);}
+  // @ts-ignore
+  gtag('js', new Date());
+  // @ts-ignore
+  gtag('config', 'AW-17545387254');
 </script>
-</head>
 
-  <body class="bg-slate-50 text-slate-800 antialiased">
-    <slot />
+<!-- Eventos personalizados en botones -->
+<script>
+  (function(){
+    /**
+     * @param {string} eventName
+     * @param {Record<string, any>} [params]
+     */
+    function track(eventName, params) {
+      // @ts-ignore
+      if (window.gtag) {
+        // @ts-ignore
+        window.gtag('event', eventName, params || {});
+      // @ts-ignore
+      } else if (window.dataLayer) {
+        // @ts-ignore
+        window.dataLayer.push({ event: eventName, ...(params || {}) });
+      } else {
+        console.log('event', eventName, params || {});
+      }
+    }
 
-    <!-- Tracking de CTAs: GA4 o GTM fallback -->
-    <script>
-      (function(){
-        function track(eventName, params) {
-          if (window.gtag) {
-            window.gtag('event', eventName, params || {});
-          } else if (window.dataLayer) {
-            window.dataLayer.push({ event: eventName, ...(params||{}) });
-          } else {
-            console.log('event', eventName, params || {});
-          }
-        }
+    function onReady(cb) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', cb);
+      } else { cb(); }
+    }
 
-        function onReady(cb) {
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', cb);
-          } else { cb(); }
-        }
+    onReady(function () {
+      document.querySelectorAll('[data-cta]')?.forEach(function(el){
+        el.addEventListener('click', function(){
+          const id = el.getAttribute('data-cta') || 'cta';
 
-        onReady(function () {
-          document.querySelectorAll('[data-cta]')?.forEach(function(el){
-            el.addEventListener('click', function(){
-              const id = el.getAttribute('data-cta') || 'cta';
-              track('cta_click', { id });
-              if (id.includes('whatsapp')) track('click_whatsapp', { id });
-              if (id.includes('llamar') || id.includes('call')) track('click_tel', { id });
+          track('cta_click', { id });
+
+          if (id.includes('whatsapp')) {
+            track('click_whatsapp', { id });
+            // @ts-ignore
+            gtag('event', 'conversion', {
+              'send_to': 'AW-17545387254/WndcCM6r-LkbEPa5pa5B',
+              'value': 1.0,
+              'currency': 'CLP'
             });
-          });
+          }
+
+          if (id.includes('llamar') || id.includes('call')) {
+            track('click_tel', { id });
+            // @ts-ignore
+            gtag('event', 'conversion', {
+              'send_to': 'AW-17545387254/VBFyCMav-LkbEPa5pa5B',
+              'value': 1.0,
+              'currency': 'CLP'
+            });
+          }
         });
-      })();
-    </script>
+      });
+    });
+  })();
+</script>
+
   </body>
 </html>
