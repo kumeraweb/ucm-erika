@@ -1,11 +1,10 @@
 ---
 import { SITE } from "../data/site";
+import "../styles/global.css";
 
 const canonical = SITE.domain.replace(/\/+$/, "");
 const title = `Unidad Coronaria Móvil (UCM) 24/7 | Asistencia Médica y Rescate a Domicilio`;
 const description = `Contrata tu plan con la Unidad Coronaria Móvil (UCM). Asistencia médica 24/7, ambulancias equipadas y cobertura en Santiago y Valparaíso. Cotiza hoy.`;
-
-import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -17,7 +16,6 @@ import "../styles/global.css";
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <title>{title}</title>
     <meta name="description" content={description} />
-
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/favicon.png" />
 
@@ -36,7 +34,7 @@ import "../styles/global.css";
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${canonical}/og-ucm.jpg`} />
 
-    <!-- Schema -->
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
@@ -74,76 +72,78 @@ import "../styles/global.css";
       })}
     </script>
 
-    <!-- Google Tag global (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
-    <script>
-      // @ts-ignore
-      window.dataLayer = window.dataLayer || [];
-      // @ts-ignore
-      function gtag(){dataLayer.push(arguments);}
-      // @ts-ignore
-      gtag('js', new Date());
-      // @ts-ignore
-      gtag('config', 'AW-17545387254');
+     <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    gtag('js', new Date());
+    gtag('config', 'AW-17545387254');
+  </script>
+
+    <!-- Script de tracking de CTA -->
+    <script defer>
+      window.addEventListener("load", function () {
+        // console.log("🟡 Esperando que gtag esté disponible...");
+
+        let attempts = 0;
+        const maxAttempts = 20;
+        const delay = 300;
+
+        const interval = setInterval(() => {
+          attempts++;
+
+          const hasGtag = typeof gtag === "function";
+          const hasScript = !!document.querySelector('script[src*="googletagmanager.com/gtag/js"]');
+
+          // console.log(`[debug] Intento ${attempts}/${maxAttempts}`);
+          // console.log(`[debug] gtag disponible:`, hasGtag);
+          // console.log(`[debug] Script presente:`, hasScript);
+
+          if (hasGtag) {
+            clearInterval(interval);
+            // console.log("✅ gtag está listo, activando tracking de botones");
+
+            document.querySelectorAll("[data-cta]")?.forEach((el) => {
+              el.addEventListener("click", () => {
+                const id = el.getAttribute("data-cta") || "cta";
+                // console.log(`[gtag] Click detectado: ${id}`);
+
+                gtag("event", "cta_click", { id });
+
+                if (id.includes("whatsapp")) {
+                  gtag("event", "click_whatsapp", { id });
+                  gtag("event", "conversion", {
+                    send_to: "AW-17545387254/WndcCM6r-LkbEPa5pa5B",
+                    value: 1.0,
+                    currency: "CLP"
+                  });
+                }
+
+                if (id.includes("llamar") || id.includes("call")) {
+                  gtag("event", "click_tel", { id });
+                  gtag("event", "conversion", {
+                    send_to: "AW-17545387254/VBFyCMav-LkbEPa5pa5B",
+                    value: 1.0,
+                    currency: "CLP"
+                  });
+                }
+              });
+            });
+          }
+
+          if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            // console.warn("⛔ No se pudo detectar gtag después de varios intentos.");
+            // console.warn("Sospecha: ⚠️ problema con el script de Google o conflicto con Astro.");
+          }
+        }, delay);
+      });
     </script>
   </head>
 
   <body class="bg-slate-50 text-slate-800 antialiased">
     <slot />
-
-    <!-- Eventos personalizados en botones -->
-    <script>
-      (function(){
-        function track(eventName, params) {
-          // @ts-ignore
-          if (window.gtag) {
-            // @ts-ignore
-            window.gtag('event', eventName, params || {});
-          // @ts-ignore
-          } else if (window.dataLayer) {
-            // @ts-ignore
-            window.dataLayer.push({ event: eventName, ...(params || {}) });
-          } else {
-            console.log('event', eventName, params || {});
-          }
-        }
-
-        function onReady(cb) {
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', cb);
-          } else { cb(); }
-        }
-
-        onReady(function () {
-          document.querySelectorAll('[data-cta]')?.forEach(function(el){
-            el.addEventListener('click', function(){
-              const id = el.getAttribute('data-cta') || 'cta';
-
-              track('cta_click', { id });
-
-              if (id.includes('whatsapp')) {
-                track('click_whatsapp', { id });
-                // @ts-ignore
-                gtag('event', 'conversion', {
-                  'send_to': 'AW-17545387254/WndcCM6r-LkbEPa5pa5B',
-                  'value': 1.0,
-                  'currency': 'CLP'
-                });
-              }
-
-              if (id.includes('llamar') || id.includes('call')) {
-                track('click_tel', { id });
-                // @ts-ignore
-                gtag('event', 'conversion', {
-                  'send_to': 'AW-17545387254/VBFyCMav-LkbEPa5pa5B',
-                  'value': 1.0,
-                  'currency': 'CLP'
-                });
-              }
-            });
-          });
-        });
-      })();
-    </script>
   </body>
 </html>
