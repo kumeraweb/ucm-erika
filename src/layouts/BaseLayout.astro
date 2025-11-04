@@ -5,7 +5,7 @@ const canonical = SITE.domain.replace(/\/+$/, "");
 const title = `Unidad Coronaria Móvil (UCM) 24/7 | Asistencia Médica y Rescate a Domicilio`;
 const description = `Contrata tu plan con la Unidad Coronaria Móvil (UCM). Asistencia médica 24/7, ambulancias equipadas y cobertura en Santiago y Valparaíso. Cotiza hoy.`;
 
-import '../styles/global.css';
+import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -74,77 +74,76 @@ import '../styles/global.css';
       })}
     </script>
 
-   <!-- Google Tag global (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
-<script>
-  // @ts-ignore
-  window.dataLayer = window.dataLayer || [];
-  // @ts-ignore
-  function gtag(){dataLayer.push(arguments);}
-  // @ts-ignore
-  gtag('js', new Date());
-  // @ts-ignore
-  gtag('config', 'AW-17545387254');
-</script>
-
-<!-- Eventos personalizados en botones -->
-<script>
-  (function(){
-    /**
-     * @param {string} eventName
-     * @param {Record<string, any>} [params]
-     */
-    function track(eventName, params) {
+    <!-- Google Tag global (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
+    <script>
       // @ts-ignore
-      if (window.gtag) {
-        // @ts-ignore
-        window.gtag('event', eventName, params || {});
+      window.dataLayer = window.dataLayer || [];
       // @ts-ignore
-      } else if (window.dataLayer) {
-        // @ts-ignore
-        window.dataLayer.push({ event: eventName, ...(params || {}) });
-      } else {
-        console.log('event', eventName, params || {});
-      }
-    }
+      function gtag(){dataLayer.push(arguments);}
+      // @ts-ignore
+      gtag('js', new Date());
+      // @ts-ignore
+      gtag('config', 'AW-17545387254');
+    </script>
+  </head>
 
-    function onReady(cb) {
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', cb);
-      } else { cb(); }
-    }
+  <body class="bg-slate-50 text-slate-800 antialiased">
+    <slot />
 
-    onReady(function () {
-      document.querySelectorAll('[data-cta]')?.forEach(function(el){
-        el.addEventListener('click', function(){
-          const id = el.getAttribute('data-cta') || 'cta';
-
-          track('cta_click', { id });
-
-          if (id.includes('whatsapp')) {
-            track('click_whatsapp', { id });
+    <!-- Eventos personalizados en botones -->
+    <script>
+      (function(){
+        function track(eventName, params) {
+          // @ts-ignore
+          if (window.gtag) {
             // @ts-ignore
-            gtag('event', 'conversion', {
-              'send_to': 'AW-17545387254/WndcCM6r-LkbEPa5pa5B',
-              'value': 1.0,
-              'currency': 'CLP'
-            });
-          }
-
-          if (id.includes('llamar') || id.includes('call')) {
-            track('click_tel', { id });
+            window.gtag('event', eventName, params || {});
+          // @ts-ignore
+          } else if (window.dataLayer) {
             // @ts-ignore
-            gtag('event', 'conversion', {
-              'send_to': 'AW-17545387254/VBFyCMav-LkbEPa5pa5B',
-              'value': 1.0,
-              'currency': 'CLP'
-            });
+            window.dataLayer.push({ event: eventName, ...(params || {}) });
+          } else {
+            console.log('event', eventName, params || {});
           }
+        }
+
+        function onReady(cb) {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', cb);
+          } else { cb(); }
+        }
+
+        onReady(function () {
+          document.querySelectorAll('[data-cta]')?.forEach(function(el){
+            el.addEventListener('click', function(){
+              const id = el.getAttribute('data-cta') || 'cta';
+
+              track('cta_click', { id });
+
+              if (id.includes('whatsapp')) {
+                track('click_whatsapp', { id });
+                // @ts-ignore
+                gtag('event', 'conversion', {
+                  'send_to': 'AW-17545387254/WndcCM6r-LkbEPa5pa5B',
+                  'value': 1.0,
+                  'currency': 'CLP'
+                });
+              }
+
+              if (id.includes('llamar') || id.includes('call')) {
+                track('click_tel', { id });
+                // @ts-ignore
+                gtag('event', 'conversion', {
+                  'send_to': 'AW-17545387254/VBFyCMav-LkbEPa5pa5B',
+                  'value': 1.0,
+                  'currency': 'CLP'
+                });
+              }
+            });
+          });
         });
-      });
-    });
-  })();
-</script>
-
+      })();
+    </script>
   </body>
 </html>
