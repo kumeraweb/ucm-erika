@@ -10,7 +10,7 @@ export const SITE = {
 
   // Email oficial UCM
   // email: 'ezuniga@ucmchile.cl',
-  email: 'javiernfigueroa@gmail.com',
+  email: 'ezuniga@ucmchile.cl',
 
   // Áreas o ciudades atendidas
   city: 'Región Metropolitana y V Región',
