@@ -1,10 +1,9 @@
 ---
-// Header.astro
 import { SITE } from '../data/site'
+import { LINKS } from '../data/site'
 
-// Asegúrate que cleanPhone sea 569XXXXXXXX (sin +)
-const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(SITE.name)}%2C%20quiero%20cotizar%20un%20plan%20UCM&utm_source=site&utm_medium=header&utm_campaign=cta_whatsapp`
-const tel = `tel:+${SITE.cleanPhone}`
+const wa = LINKS.wa()
+const tel = LINKS.call()
 ---
 
 <a
@@ -15,31 +14,34 @@ const tel = `tel:+${SITE.cleanPhone}`
 </a>
 
 <header class="sticky top-0 z-50 bg-white/90 border-b border-slate-200 backdrop-blur-md">
-  <!-- Nota anti-confusión -->
-  <!-- <div class="hidden md:block text-center text-[11px] md:text-xs text-slate-600 py-1">
-    Canal exclusivo para <strong>contratación de planes UCM</strong>. No usar en caso de
-    emergencias.
-  </div> -->
-
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between md:justify-start">
     <!-- LOGO -->
-    <div class="flex items-center gap-3">
-      <a href="/" aria-label="Inicio - Planes UCM | Rescate Médico">
-        <img
-          src="/logos/logo-ucm.png"
-          alt="Planes UCM – Contratación y asesoría"
-          class="h-12 md:h-16 w-auto"
-          width="160"
-          height="64"
-          loading="eager"
-          decoding="async"
-        />
-      </a>
-    </div>
+    <a href="/" aria-label="Inicio - Planes UCM" class="flex-shrink-0">
+      <img
+        src="/logos/logo-ucm.png"
+        alt="Planes UCM – Contratación y asesoría"
+        class="h-12 md:h-16 w-auto"
+        width="160"
+        height="64"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
+
+    <!-- BOTÓN RÁPIDO SOLO EN MOBILE (WhatsApp) -->
+    <a
+      href={wa}
+      data-cta="whatsapp"
+      class="ml-3 md:hidden inline-flex items-center px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold text-sm shadow hover:bg-emerald-700"
+      aria-label="WhatsApp directo para cotizar"
+      rel="noopener nofollow"
+    >
+      Contactar
+    </a>
 
     <!-- NAV DESKTOP -->
     <nav
-      class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600"
+      class="hidden md:flex ml-auto items-center gap-6 text-sm font-medium text-slate-600"
       aria-label="Navegación principal"
     >
       <a href="#planes" class="hover:text-slate-900">Planes</a>
@@ -48,21 +50,21 @@ const tel = `tel:+${SITE.cleanPhone}`
 
       <a
         href={tel}
+        data-cta="llamar"
         class="text-slate-900 hover:underline whitespace-nowrap"
-        data-cta="llamar_header"
-        aria-label="Llamar a la ejecutiva para contratar un plan UCM"
+        aria-label="Llamar a la ejecutiva"
         rel="nofollow"
       >
-        Llamar a ejecutiva: {SITE.phone}
+        Llamar a ejecutiva: +56 9 {SITE.phone}
       </a>
     </nav>
 
-    <!-- CTA PRINCIPAL DESKTOP -->
+    <!-- CTA WHATSAPP DESKTOP -->
     <a
       href={wa}
       target="_blank"
-      data-cta="whatsapp_header"
-      class="hidden md:inline-flex rounded-xl px-3 py-2 md:px-5 md:py-2 bg-emerald-600 text-white font-semibold text-sm shadow hover:bg-emerald-700 focus:outline-none"
+      data-cta="whatsapp"
+      class="hidden md:inline-flex ml-6 rounded-xl px-5 py-2 bg-emerald-600 text-white font-semibold text-sm shadow hover:bg-emerald-700"
       aria-label="Cotizar plan UCM por WhatsApp"
       rel="noopener nofollow"
     >
@@ -72,7 +74,7 @@ const tel = `tel:+${SITE.cleanPhone}`
     <!-- BOTÓN MENÚ MÓVIL -->
     <button
       type="button"
-      class="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-slate-300 text-slate-700"
+      class="md:hidden ml-3 inline-flex items-center justify-center p-2 rounded-md border border-slate-300 text-slate-700"
       aria-label="Abrir menú"
       aria-controls="mobile-menu"
       aria-expanded="false"
@@ -94,9 +96,8 @@ const tel = `tel:+${SITE.cleanPhone}`
 
       <a
         href={wa}
-        data-cta="whatsapp_header_mobile"
+        data-cta="whatsapp"
         class="rounded-lg px-4 py-3 bg-emerald-600 text-white font-semibold text-center"
-        aria-label="Cotizar plan UCM por WhatsApp"
         rel="noopener nofollow"
       >
         Cotizar por WhatsApp
@@ -104,26 +105,19 @@ const tel = `tel:+${SITE.cleanPhone}`
 
       <a
         href={tel}
-        data-cta="llamar_header_mobile"
+        data-cta="llamar"
         class="rounded-lg px-4 py-3 bg-[#204D8D] text-white font-semibold text-center"
-        aria-label="Llamar a la ejecutiva para contratar un plan UCM"
         rel="nofollow"
       >
         Llamar a la ejecutiva
       </a>
-
-      <p class="text-[11px] text-slate-500 text-center">
-        Canal exclusivo para <strong>contratación de planes</strong>.
-      </p>
     </nav>
   </div>
 </header>
 
-<!-- Ancla de contenido principal para el skip link -->
 <div id="contenido" class="sr-only" aria-hidden="true"></div>
 
 <script>
-  // Toggle del menú móvil con accesibilidad
   ;(function () {
     const btn = document.getElementById('menuBtn')
     const menu = document.getElementById('mobile-menu')
@@ -137,8 +131,7 @@ const tel = `tel:+${SITE.cleanPhone}`
     }
 
     btn.addEventListener('click', () => toggle())
-    // Cierra menú al navegar a anclas
-    menu.querySelectorAll('a[href^="#"]').forEach((a) => {
+    menu.querySelectorAll("a[href^='#']").forEach((a) => {
       a.addEventListener('click', () => toggle(false))
     })
   })()

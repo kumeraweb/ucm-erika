@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { SITE } from '../data/site'
+---
+
+<BaseLayout>
+  <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-20">
+    <!-- Icono de éxito -->
+    <div class="bg-emerald-100 text-emerald-700 p-5 rounded-full mb-6 shadow-sm">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-10 h-10"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+      </svg>
+    </div>
+
+    <!-- Título -->
+    <h1 class="text-3xl md:text-4xl font-extrabold text-[#204D8D] mb-4">
+      ¡Gracias por tu contacto!
+    </h1>
+
+    <!-- Texto -->
+    <p class="text-lg text-slate-600 max-w-md mb-10">
+      He recibido tu correo correctamente. Te escribiré pronto con la información del plan UCM.
+    </p>
+
+    <!-- Botón volver -->
+    <a
+      href="/"
+      class="px-8 py-3 rounded-xl bg-[#204D8D] text-white font-semibold text-lg hover:bg-[#1b3f74] shadow"
+    >
+      Volver al inicio
+    </a>
+  </section>
+</BaseLayout>

@@ -1,10 +1,10 @@
 ---
 import { SITE } from '../data/site'
+import { LINKS } from '../data/site'
 
-const wa = `https://wa.me/${SITE.cleanPhone}?text=Hola%20${encodeURIComponent(
-  SITE.name
-)}%2C%20quiero%20cotizar%20UCM`
-const call = `tel:+${SITE.cleanPhone}`
+// Helpers oficiales
+const wa = LINKS.wa()
+const call = LINKS.call()
 ---
 
 <section id="contacto" class="py-20 bg-white">
@@ -17,7 +17,7 @@ const call = `tel:+${SITE.cleanPhone}`
       <p class="mt-3 text-lg text-slate-600">
         Habla directo con <span class="font-semibold text-slate-800">tu ejecutiva</span> — UCM {
           SITE.city
-        }, {SITE.region}
+        }
       </p>
     </div>
 
@@ -37,11 +37,11 @@ const call = `tel:+${SITE.cleanPhone}`
         <div class="flex items-center gap-2">
           <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
           <dt class="font-semibold">Ciudad/Región:</dt>
-          <dd class="ml-1">UCM {SITE.city}, {SITE.region}</dd>
+          <dd class="ml-1">UCM {SITE.city}</dd>
         </div>
         <div>
           <dt class="font-semibold inline">Teléfono:</dt>
-          <dd class="inline">{SITE.phone}</dd>
+          <dd class="inline">+56 {SITE.phone}</dd>
         </div>
         <div>
           <dt class="font-semibold inline">Correo:</dt>
@@ -49,20 +49,26 @@ const call = `tel:+${SITE.cleanPhone}`
         </div>
       </dl>
 
+      <!-- CTA -->
       <div class="mt-6 flex flex-wrap gap-3">
         <a
           href={wa}
           target="_blank"
-          data-cta="whatsapp_contact"
+          data-cta="whatsapp"
           class="rounded-xl px-5 py-3 bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow"
-          aria-label="Escribir a la ejecutiva por WhatsApp">Escribir por WhatsApp</a
+          aria-label="Escribir a la ejecutiva por WhatsApp"
         >
+          Escribir por WhatsApp
+        </a>
+
         <a
           href={call}
-          data-cta="call_contact"
+          data-cta="llamar"
           class="rounded-xl px-5 py-3 bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow"
-          aria-label="Llamar ahora a la ejecutiva">Llamar ahora</a
+          aria-label="Llamar ahora a la ejecutiva"
         >
+          Llamar ahora
+        </a>
       </div>
     </aside>
   </div>

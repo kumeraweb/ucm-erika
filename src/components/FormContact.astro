@@ -1,0 +1,58 @@
+---
+import { SITE } from '../data/site'
+
+const execEmail = SITE.email
+const nextUrl = `${SITE.domain}/gracias`
+---
+
+<section class="py-16 bg-slate-50" id="formulario">
+  <div class="max-w-xl mx-auto px-4 text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-[#204D8D]">¿Prefieres que te escriba?</h2>
+
+    <p class="mt-3 text-slate-600 text-lg">
+      Déjame tu correo y te enviaré la información del plan UCM.
+    </p>
+
+    <form
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      class="mt-8 flex flex-col gap-4 text-left bg-white p-6 rounded-2xl shadow-md border border-slate-200"
+      onsubmit="gtag('event','conversion',{send_to:'AW-17545387254/WndcCM6r-LkbEPa5pa5B'})"
+    >
+      <!-- API KEY -->
+      <input type="hidden" name="access_key" value="d0c500e2-3c61-4001-9eda-1ec6f9324a17" />
+
+      <!-- Destinatario REAL -->
+      <input type="hidden" name="to_email" value={execEmail} />
+
+      <!-- Redirección -->
+      <input type="hidden" name="redirect" value={nextUrl} />
+
+      <!-- Asunto del correo -->
+      <input type="hidden" name="subject" value="Nuevo lead desde RescatesMedicos.cl" />
+
+      <!-- Campo del usuario -->
+      <label class="text-sm font-semibold text-slate-700">
+        Correo electrónico
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="tunombre@gmail.com"
+          class="mt-1 w-full border border-slate-300 rounded-lg px-4 py-3 text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+        />
+      </label>
+
+      <button
+        type="submit"
+        class="mt-4 w-full rounded-xl bg-emerald-600 text-white font-semibold px-4 py-3 text-lg hover:bg-emerald-700 shadow"
+      >
+        Enviar información
+      </button>
+    </form>
+
+    <p class="text-xs text-slate-400 mt-3">
+      Solo para fines de contacto. No compartimos tu información.
+    </p>
+  </div>
+</section>
