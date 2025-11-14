@@ -19,7 +19,7 @@ export const SITE = {
   domain: 'https://www.rescatesmedicos.cl',
 
   // Imagen para OpenGraph
-  ogImage: '/images/og-default.jpg',
+  ogImage: '/images/og-default.png',
 
   // Título SEO opcional (usa este por defecto)
   title: 'Contrata tu Plan UCM | Ejecutiva Oficial',
