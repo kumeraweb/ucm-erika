@@ -73,20 +73,29 @@ const image = SITE.ogImage || '/images/og-default.jpg'
           el.addEventListener('click', () => {
             const id = el.getAttribute('data-cta')
 
-            // Tracking general del CTA (opcional)
             gtag('event', 'cta_click', { id })
 
-            // WhatsApp
             if (id === 'whatsapp') {
               gtag('event', 'conversion', {
-                send_to: 'AW-17545387254/uvKJCO_f_cEbEPa5pa5B'
+                send_to: 'AW-17545387254/uvKJCO_f_cEbEPa5pa5B',
+                value: 1.0,
+                currency: 'CLP'
               })
             }
 
-            // Llamar
             if (id === 'llamar') {
               gtag('event', 'conversion', {
-                send_to: 'AW-17545387254/KJCKCPLf_cEbEPa5pa5B'
+                send_to: 'AW-17545387254/KJCKCPLf_cEbEPa5pa5B',
+                value: 1.0,
+                currency: 'CLP'
+              })
+            }
+
+            if (id === 'formulario') {
+              gtag('event', 'conversion', {
+                send_to: 'AW-17545387254/xxxxFORMxxxx',
+                value: 1.0,
+                currency: 'CLP'
               })
             }
           })
