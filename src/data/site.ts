@@ -2,31 +2,30 @@ export const SITE = {
   // Nombre de la ejecutiva
   name: 'Erika Zuñiga',
 
-  // Teléfono sin signos, solo números
+  // Teléfono sin signos
   phone: '942874934',
 
-  // Mensaje predeterminado de WhatsApp
-  whatsappMsg: 'Hola Erika, quiero cotizar un plan UCM',
+  // Mensaje predeterminado de WhatsApp (tono neutro)
+  whatsappMsg: 'Hola Erika, quisiera información sobre los planes UCM',
 
-  // Email oficial UCM
-  // email: 'ezuniga@ucmchile.cl',
+  // Email oficial
   email: 'ezuniga@ucmchile.cl',
 
   // Áreas o ciudades atendidas
   city: 'Región Metropolitana y V Región',
 
-  // Dominio del sitio (sin slash al final)
+  // Dominio del sitio (sin slash)
   domain: 'https://www.rescatesmedicos.cl',
 
-  // Imagen para OpenGraph
+  // Imagen OG
   ogImage: '/images/og-default.png',
 
-  // Título SEO opcional (usa este por defecto)
-  title: 'Contrata tu Plan UCM | Ejecutiva Oficial',
+  // Título SEO neutral
+  title: 'Ejecutiva de Planes UCM | Erika Zuñiga',
 
-  // Descripción SEO opcional
+  // Descripción 100% segura
   description:
-    'Afíliate a UCM con ejecutiva oficial. Atención médica a domicilio 24/7 en RM y V Región. Cotiza hoy por WhatsApp o llamada directa.'
+    'Información y asesoría comercial para contratar planes UCM. Consulta directamente con tu ejecutiva autorizada en Región Metropolitana y V Región.'
 }
 
 // Helpers universales
