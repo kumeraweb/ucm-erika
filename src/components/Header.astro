@@ -15,11 +15,10 @@ const tel = LINKS.call()
 
 <header class="sticky top-0 z-50 bg-white/90 border-b border-slate-200 backdrop-blur-md">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between md:justify-start">
-    <!-- LOGO -->
     <a href="/" aria-label="Inicio - Planes UCM" class="flex-shrink-0">
       <img
         src="/logos/logo-ucm.png"
-        alt="Planes UCM – Contratación y asesoría"
+        alt="Planes UCM – Información y afiliación"
         class="h-12 md:h-16 w-auto"
         width="160"
         height="64"
@@ -28,7 +27,6 @@ const tel = LINKS.call()
       />
     </a>
 
-    <!-- BOTÓN RÁPIDO SOLO EN MOBILE (WhatsApp) -->
     <a
       href={wa}
       data-cta="whatsapp"
@@ -39,7 +37,6 @@ const tel = LINKS.call()
       Contactar
     </a>
 
-    <!-- NAV DESKTOP -->
     <nav
       class="hidden md:flex ml-auto items-center gap-6 text-sm font-medium text-slate-600"
       aria-label="Navegación principal"
@@ -55,11 +52,10 @@ const tel = LINKS.call()
         aria-label="Llamar a la ejecutiva"
         rel="nofollow"
       >
-        Llamar a ejecutiva: +56 {SITE.phone}
+        Contactar ejecutiva: +56 {SITE.phone}
       </a>
     </nav>
 
-    <!-- CTA WHATSAPP DESKTOP -->
     <a
       href={wa}
       target="_blank"
@@ -71,7 +67,6 @@ const tel = LINKS.call()
       Cotizar por WhatsApp
     </a>
 
-    <!-- BOTÓN MENÚ MÓVIL -->
     <button
       type="button"
       class="md:hidden ml-3 inline-flex items-center justify-center p-2 rounded-md border border-slate-300 text-slate-700"
@@ -84,7 +79,6 @@ const tel = LINKS.call()
     </button>
   </div>
 
-  <!-- MENÚ MÓVIL -->
   <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white">
     <nav
       class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm"
@@ -109,7 +103,7 @@ const tel = LINKS.call()
         class="rounded-lg px-4 py-3 bg-[#204D8D] text-white font-semibold text-center"
         rel="nofollow"
       >
-        Llamar a la ejecutiva
+        Contactar ejecutiva
       </a>
     </nav>
   </div>

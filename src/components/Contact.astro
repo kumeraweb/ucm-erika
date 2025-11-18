@@ -2,34 +2,29 @@
 import { SITE } from '../data/site'
 import { LINKS } from '../data/site'
 
-// Helpers oficiales
 const wa = LINKS.wa()
 const call = LINKS.call()
 ---
 
 <section id="contacto" class="py-20 bg-white">
   <div class="max-w-4xl mx-auto px-4">
-    <!-- Encabezado -->
     <div class="text-center mb-10">
       <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-[#204D8D]">
-        ¿Listo para contratar?
+        ¿Listo para cotizar tu plan?
       </h2>
       <p class="mt-3 text-lg text-slate-600">
-        Habla directo con <span class="font-semibold text-slate-800">tu ejecutiva</span> — UCM {
-          SITE.city
-        }
+        Habla directo con <span class="font-semibold text-slate-800">tu ejecutiva autorizada</span> —
+        UCM {SITE.city}
       </p>
     </div>
 
-    <!-- Tarjeta ejecutiva -->
     <aside
       class="max-w-xl mx-auto rounded-2xl border border-slate-200 p-6 shadow-sm bg-slate-50/60"
     >
       <div class="flex items-center gap-4">
         <img src="/logos/logo-ucm.png" alt="UCM" class="h-10 w-auto" loading="lazy" />
         <div>
-          <p class="text-sm uppercase tracking-wide text-slate-500">Contacta a tu ejecutiva</p>
-          <!-- <h3 class="text-2xl font-extrabold text-slate-900">{SITE.name}</h3> -->
+          <p class="text-sm uppercase tracking-wide text-slate-500">Contacto ejecutivo</p>
         </div>
       </div>
 
@@ -49,7 +44,6 @@ const call = LINKS.call()
         </div>
       </dl>
 
-      <!-- CTA -->
       <div class="mt-6 flex flex-wrap gap-3">
         <a
           href={wa}
@@ -64,8 +58,8 @@ const call = LINKS.call()
         <a
           href={call}
           data-cta="llamar"
-          class="rounded-xl px-5 py-3 bg-[#204D8D] text-white font-semibold hover:bg-rose-600 shadow"
-          aria-label="Llamar ahora a la ejecutiva"
+          class="rounded-xl px-5 py-3 bg-[#204D8D] text-white font-semibold hover:bg-[#1b3f74] shadow"
+          aria-label="Llamar a la ejecutiva"
         >
           Llamar ahora
         </a>

@@ -21,7 +21,6 @@ const {
   poster = '/images/ucm-poster.png'
 } = Astro.props
 
-// REEMPLAZAMOS cleanPhone → LINKS oficiales
 const wa = LINKS.wa()
 const call = LINKS.call()
 ---
@@ -45,41 +44,42 @@ const call = LINKS.call()
   <div class="relative">
     <div class="max-w-6xl mx-auto px-4 py-2 md:py-32 grid md:grid-cols-2 items-center gap-10">
       <div class="max-w-2xl">
-        <!-- H1 optimizado -->
+        <!-- H1 seguro -->
         <h1
           id="hero-title"
           class="text-4xl md:text-6xl font-extrabold leading-tight text-white drop-shadow-lg"
         >
-          Planes UCM: Asistencia Médica a Domicilio 24/7
+          Planes UCM: Asesoría y Afiliación Oficial
         </h1>
 
-        <!-- Párrafo optimizado (más compacto para mobile) -->
+        <!-- Párrafo seguro -->
         <p class="mt-6 text-xl text-slate-100/95 leading-relaxed">
-          Contrata tu plan con <strong>HOY</strong> y accede a atención médica a domicilio, telemedicina
-          y orientación <strong>24/7</strong>. Te asesoro y gestiono tu contratación en minutos.
+          Te asesoro directamente para <strong>contratar tu plan UCM</strong> y acceder a los beneficios
+          de asistencia y apoyo ofrecidos por la empresa UCM en {SITE.city}. Gestión rápida y sin
+          complicaciones.
         </p>
 
-        <!-- Lista de beneficios -->
+        <!-- Lista de beneficios segura -->
         <ul class="mt-8 space-y-3 text-slate-100 text-lg">
           <li class="flex items-start gap-3">
             <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
-            <span>Cobertura <strong>24/7</strong> con orientación médica</span>
+            <span>Acceso a beneficios de asistencia para hogares y familias</span>
           </li>
           <li class="flex items-start gap-3">
             <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
-            <span><strong>Atención a domicilio</strong> + telemedicina inmediata</span>
+            <span>Orientación telefónica y soporte según tu plan contratado</span>
           </li>
           <li class="flex items-start gap-3">
             <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
-            <span>Planes <strong>familiares</strong> y <strong>empresas</strong></span>
+            <span>Planes para <strong>familias</strong> y <strong>empresas</strong></span>
           </li>
           <li class="flex items-start gap-3">
             <Check class="mt-1 text-emerald-400 shrink-0" size={22} />
-            <span>Gestión rápida con ejecutiva</span>
+            <span>Afiliación rápida con ejecutiva autorizada</span>
           </li>
         </ul>
 
-        <!-- CTAs con cta names correctos -->
+        <!-- CTAs -->
         <div class="mt-8 flex flex-wrap gap-4">
           <a
             href={wa}
@@ -110,11 +110,13 @@ const call = LINKS.call()
           </a>
         </div>
 
-        <!-- Trust hints compactos -->
+        <!-- Trust hints seguros -->
         <ul class="mt-4 flex flex-wrap gap-3 text-xs text-slate-200/90">
-          <li class="rounded-full border border-white/20 px-3 py-1">Contrato inmediato</li>
+          <li class="rounded-full border border-white/20 px-3 py-1">Gestión inmediata</li>
           <li class="rounded-full border border-white/20 px-3 py-1">Cobertura RM + V Región</li>
-          <li class="rounded-full border border-white/20 px-3 py-1">Soporte 24/7</li>
+          <li class="rounded-full border border-white/20 px-3 py-1">
+            Soporte según plan contratado
+          </li>
         </ul>
 
         <p class="mt-2 text-slate-200/90 text-sm">
@@ -133,7 +135,7 @@ const call = LINKS.call()
                   <video
                     id="heroVideo"
                     class="h-full w-full object-cover"
-                    title="Planes UCM – Asistencia Médica 24/7"
+                    title="Planes UCM – Información de afiliación"
                     poster={poster}
                     preload="metadata"
                     muted
