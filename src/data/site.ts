@@ -15,7 +15,7 @@ export const SITE = {
   city: 'Región Metropolitana y V Región',
 
   // Dominio del sitio (sin slash)
-  domain: 'https://www.rescatesmedicos.cl',
+  domain: 'https://www.contratarplanesucm.cl',
 
   // Imagen OG
   ogImage: '/images/og-default.png',
