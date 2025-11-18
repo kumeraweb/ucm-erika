@@ -1,6 +1,6 @@
 export const SITE = {
   // Nombre de la ejecutiva
-  name: 'Erika Zuñiga',
+  name: 'Ejecutiva Oficial',
 
   // Teléfono sin signos
   phone: '942874934',
@@ -21,7 +21,7 @@ export const SITE = {
   ogImage: '/images/og-default.png',
 
   // Título SEO neutral
-  title: 'Ejecutiva de Planes UCM | Erika Zuñiga',
+  title: 'Ejecutiva de Planes UCM ',
 
   // Descripción 100% segura
   description:
