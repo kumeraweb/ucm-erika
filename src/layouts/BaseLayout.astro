@@ -7,7 +7,7 @@ const canonical = SITE.domain.replace(/\/+$/, '')
 const title = SITE.title || `Contrata tu Plan UCM | Ejecutiva Oficial`
 const description =
   SITE.description ||
-  `Afíliate a UCM con ejecutiva oficial. Atención médica a domicilio 24/7 en ${SITE.city}. Cotiza hoy por WhatsApp o llamada directa.`
+  `Contrata tu plan UCM con ejecutiva autorizada. Asesoría para afiliación a planes UCM en ${SITE.city}. Cotiza hoy por WhatsApp o llamada directa.`
 
 const image = SITE.ogImage || '/images/og-default.jpg'
 ---
@@ -25,7 +25,7 @@ const image = SITE.ogImage || '/images/og-default.jpg'
     <!-- SEO Keywords -->
     <meta
       name="keywords"
-      content={`unidad coronaria móvil, planes UCM, atención médica a domicilio, rescate médico, atención 24/7, ejecutiva UCM, WhatsApp UCM, contratar plan UCM, contacto unidad coronaria móvil`}
+      content={`planes UCM, contratar plan UCM, afiliación UCM, ejecutiva UCM, cotizar plan UCM, contacto UCM, planes de asistencia UCM`}
     />
 
     <!-- Robots -->
@@ -54,16 +54,16 @@ const image = SITE.ogImage || '/images/og-default.jpg'
     <!-- Preload -->
     <link rel="preload" href={image} as="image" />
 
-    <!-- Google Ads Tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17545387254"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17742112944"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || []
       function gtag() {
         dataLayer.push(arguments)
       }
-
       gtag('js', new Date())
-      gtag('config', 'AW-17545387254')
+
+      gtag('config', 'AW-17742112944')
     </script>
 
     <!-- Tracking CTA -->
@@ -107,16 +107,16 @@ const image = SITE.ogImage || '/images/og-default.jpg'
     <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
-        "@type": "MedicalOrganization",
-        "name": "Unidad Coronaria Móvil - Ejecutiva",
+        "@type": "Organization",
+        "name": "Ejecutiva autorizada UCM",
         "url": "{canonical}",
         "logo": "{canonical}/favicon.png",
         "image": "{canonical}{image}",
-        "description": "{description}",
+        "description": "Asesoría para contratar planes UCM mediante ejecutiva autorizada.",
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+569{SITE.phone}",
-          "contactType": "sales",
+          "contactType": "customer support",
           "availableLanguage": ["Spanish"]
         },
         "areaServed": ["Santiago", "Valparaíso"]
