@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Header from '../components/Header.astro'
+import { SITE, LINKS } from '../data/site'
+
+const meta = {
+  title: 'Planes UCM | Ejecutiva Autorizada',
+  description:
+    'Revisa los planes UCM disponibles y consulta directamente con tu ejecutiva autorizada para elegir la mejor opción para tu familia.',
+  image: SITE.ogImage
+}
+---
+
+<BaseLayout {...meta}>
+  <Header />
+
+  <div class="h-24"></div>
+
+  <main class="max-w-4xl mx-auto px-6 py-14 space-y-10">
+    <h1 class="text-3xl font-bold text-[#1A2A42]">Planes UCM</h1>
+
+    <p class="text-lg text-gray-700">
+      Los planes UCM entregan acompañamiento, asistencia extrahospitalaria y servicios
+      complementarios destinados al bienestar familiar. Aquí encontrarás una visión general de los
+      distintos planes disponibles.
+    </p>
+
+    <ul class="space-y-4 text-gray-700">
+      <li>✔ Plan Familiar</li>
+      <li>✔ Plan Individual</li>
+      <li>✔ Servicios complementarios</li>
+      <li>✔ Cobertura en RM y V Región</li>
+    </ul>
+
+    <div class="mt-10 flex gap-4">
+      <a
+        href={LINKS.wa()}
+        class="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold"
+        data-cta="whatsapp"
+      >
+        Consultar por WhatsApp
+      </a>
+
+      <a
+        href={LINKS.call()}
+        class="bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold"
+        data-cta="llamar"
+      >
+        Llamar ahora
+      </a>
+    </div>
+  </main>
+</BaseLayout>

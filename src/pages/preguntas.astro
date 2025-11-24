@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Header from '../components/Header.astro'
+import { SITE, LINKS } from '../data/site'
+
+const meta = {
+  title: 'Preguntas Frecuentes | Ejecutiva UCM',
+  description:
+    'Resuelve tus dudas sobre afiliación, planes UCM, cobertura y contacto directo con tu ejecutiva autorizada.',
+  image: SITE.ogImage
+}
+---
+
+<BaseLayout {...meta}>
+  <Header />
+
+  <div class="h-24"></div>
+
+  <main class="max-w-4xl mx-auto px-6 py-14 space-y-10">
+    <h1 class="text-3xl font-bold text-[#1A2A42]">Preguntas Frecuentes</h1>
+
+    <section class="space-y-6 text-gray-700">
+      <div>
+        <h2 class="text-xl font-semibold text-[#1A2A42]">¿Qué es UCM?</h2>
+        <p>
+          UCM es un servicio privado de asistencia extrahospitalaria y acompañamiento en salud,
+          disponible en Región Metropolitana y V Región.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-[#1A2A42]">
+          ¿Las ejecutivas entregan atención médica?
+        </h2>
+        <p>
+          No. La ejecutiva autorizada brinda <strong>orientación comercial</strong> para contratar el
+          plan UCM. Los servicios de salud son entregados exclusivamente por UCM una vez realizada la
+          afiliación.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-[#1A2A42]">¿Cuáles son los planes disponibles?</h2>
+        <p>
+          Los planes pueden incluir acompañamiento, asistencia extrahospitalaria, orientación y
+          servicios complementarios. Consulta directamente para recibir el detalle actualizado.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-[#1A2A42]">
+          ¿Puedo contratar desde cualquier comuna?
+        </h2>
+        <p>
+          Sí, mientras te encuentres dentro de la cobertura oficial: Región Metropolitana y V
+          Región.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-[#1A2A42]">¿Cómo cotizo o me afilio?</h2>
+        <p>A través de tu ejecutiva autorizada, mediante WhatsApp o llamada directa.</p>
+      </div>
+    </section>
+
+    <div class="mt-10 flex gap-4">
+      <a
+        href={LINKS.wa()}
+        class="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold"
+        data-cta="whatsapp"
+      >
+        Consultar por WhatsApp
+      </a>
+
+      <a
+        href={LINKS.call()}
+        class="bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold"
+        data-cta="llamar"
+      >
+        Llamar ahora
+      </a>
+    </div>
+  </main>
+</BaseLayout>
